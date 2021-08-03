@@ -6,3 +6,4 @@ package-lock.json
 examples/go
 examples/moby
 target
+*.wasm

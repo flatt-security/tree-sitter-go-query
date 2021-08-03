@@ -1,6 +1,6 @@
 [package]
-name = "tree-sitter-go"
-description = "Go grammar for the tree-sitter parsing library"
+name = "tree-sitter-go-query"
+description = "go-query grammar for the tree-sitter parsing library"
 version = "0.19.0"
 authors = [
     "Max Brunsfeld <maxbrunsfeld@gmail.com>",

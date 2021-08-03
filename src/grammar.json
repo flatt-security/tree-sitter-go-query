@@ -62,6 +62,53 @@
         ]
       }
     },
+    "shisho_ellipsis": {
+      "type": "STRING",
+      "value": ":[...]"
+    },
+    "shisho_metavariable": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": ":["
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "shisho_metavariable_name"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "shisho_metavariable_ellipsis_name"
+            }
+          ]
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
+    "shisho_metavariable_name": {
+      "type": "PATTERN",
+      "value": "[A-Z_][A-Z_0-9]*"
+    },
+    "shisho_metavariable_ellipsis_name": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "..."
+        },
+        {
+          "type": "SYMBOL",
+          "name": "shisho_metavariable_name"
+        }
+      ]
+    },
     "_top_level_declaration": {
       "type": "CHOICE",
       "members": [
@@ -2873,6 +2920,14 @@
     "_expression": {
       "type": "CHOICE",
       "members": [
+        {
+          "type": "SYMBOL",
+          "name": "shisho_ellipsis"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "shisho_metavariable"
+        },
         {
           "type": "SYMBOL",
           "name": "unary_expression"
