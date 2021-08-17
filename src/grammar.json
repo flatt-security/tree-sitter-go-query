@@ -730,6 +730,10 @@
                             },
                             {
                               "type": "SYMBOL",
+                              "name": "shisho_ellipsis"
+                            },
+                            {
+                              "type": "SYMBOL",
                               "name": "shisho_metavariable"
                             },
                             {
@@ -757,6 +761,10 @@
                                   {
                                     "type": "SYMBOL",
                                     "name": "shisho_ellipsis_metavariable"
+                                  },
+                                  {
+                                    "type": "SYMBOL",
+                                    "name": "shisho_ellipsis"
                                   },
                                   {
                                     "type": "SYMBOL",

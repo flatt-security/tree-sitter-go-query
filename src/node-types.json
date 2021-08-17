@@ -1763,6 +1763,10 @@
           "named": true
         },
         {
+          "type": "shisho_ellipsis",
+          "named": true
+        },
+        {
           "type": "shisho_ellipsis_metavariable",
           "named": true
         },

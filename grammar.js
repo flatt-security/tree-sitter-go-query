@@ -229,6 +229,7 @@ module.exports = grammar({
             commaSep(
               choice(
                 $.shisho_ellipsis_metavariable,
+                $.shisho_ellipsis,
                 $.shisho_metavariable,
                 $.parameter_declaration,
                 $.variadic_parameter_declaration
