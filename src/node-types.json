@@ -72,6 +72,10 @@
         "named": true
       },
       {
+        "type": "shisho_ellipsis_metavariable",
+        "named": true
+      },
+      {
         "type": "shisho_metavariable",
         "named": true
       },
@@ -239,6 +243,18 @@
       },
       {
         "type": "select_statement",
+        "named": true
+      },
+      {
+        "type": "shisho_ellipsis",
+        "named": true
+      },
+      {
+        "type": "shisho_ellipsis_metavariable",
+        "named": true
+      },
+      {
+        "type": "shisho_metavariable",
         "named": true
       },
       {
@@ -956,6 +972,25 @@
     }
   },
   {
+    "type": "field_identifier",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier_intl",
+          "named": true
+        },
+        {
+          "type": "shisho_metavariable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "for_clause",
     "named": true,
     "fields": {
@@ -1170,6 +1205,25 @@
       "types": [
         {
           "type": "label_name",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "identifier",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": false,
+      "types": [
+        {
+          "type": "identifier_intl",
+          "named": true
+        },
+        {
+          "type": "shisho_metavariable",
           "named": true
         }
       ]
@@ -1408,6 +1462,25 @@
     }
   },
   {
+    "type": "label_name",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier_intl",
+          "named": true
+        },
+        {
+          "type": "shisho_metavariable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "labeled_statement",
     "named": true,
     "fields": {
@@ -1447,6 +1520,18 @@
         },
         {
           "type": "keyed_element",
+          "named": true
+        },
+        {
+          "type": "shisho_ellipsis",
+          "named": true
+        },
+        {
+          "type": "shisho_ellipsis_metavariable",
+          "named": true
+        },
+        {
+          "type": "shisho_metavariable",
           "named": true
         }
       ]
@@ -1617,6 +1702,25 @@
     }
   },
   {
+    "type": "package_identifier",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier_intl",
+          "named": true
+        },
+        {
+          "type": "shisho_metavariable",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "parameter_declaration",
     "named": true,
     "fields": {
@@ -1656,6 +1760,14 @@
       "types": [
         {
           "type": "parameter_declaration",
+          "named": true
+        },
+        {
+          "type": "shisho_ellipsis_metavariable",
+          "named": true
+        },
+        {
+          "type": "shisho_metavariable",
           "named": true
         },
         {
@@ -1875,17 +1987,13 @@
     }
   },
   {
-    "type": "shisho_metavariable",
+    "type": "shisho_ellipsis_metavariable",
     "named": true,
     "fields": {},
     "children": {
       "multiple": false,
       "required": true,
       "types": [
-        {
-          "type": "shisho_metavariable_ellipsis_name",
-          "named": true
-        },
         {
           "type": "shisho_metavariable_name",
           "named": true
@@ -1894,7 +2002,7 @@
     }
   },
   {
-    "type": "shisho_metavariable_ellipsis_name",
+    "type": "shisho_metavariable",
     "named": true,
     "fields": {},
     "children": {
@@ -2164,6 +2272,25 @@
         },
         {
           "type": "type_spec",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "type_identifier",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "identifier_intl",
+          "named": true
+        },
+        {
+          "type": "shisho_metavariable",
           "named": true
         }
       ]
@@ -2624,10 +2751,6 @@
     "named": true
   },
   {
-    "type": "field_identifier",
-    "named": true
-  },
-  {
     "type": "float_literal",
     "named": true
   },
@@ -2648,7 +2771,7 @@
     "named": false
   },
   {
-    "type": "identifier",
+    "type": "identifier_intl",
     "named": true
   },
   {
@@ -2672,10 +2795,6 @@
     "named": false
   },
   {
-    "type": "label_name",
-    "named": true
-  },
-  {
     "type": "map",
     "named": false
   },
@@ -2686,10 +2805,6 @@
   {
     "type": "package",
     "named": false
-  },
-  {
-    "type": "package_identifier",
-    "named": true
   },
   {
     "type": "range",
@@ -2734,10 +2849,6 @@
   {
     "type": "type",
     "named": false
-  },
-  {
-    "type": "type_identifier",
-    "named": true
   },
   {
     "type": "var",

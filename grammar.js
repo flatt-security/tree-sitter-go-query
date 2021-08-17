@@ -81,9 +81,16 @@ module.exports = grammar({
     $._string_literal,
   ],
 
-  word: ($) => $.identifier,
+  word: ($) => $.identifier_intl,
 
   conflicts: ($) => [
+    [$._expression, $._statement, $.identifier],
+    [$._expression, $.literal_value, $.identifier],
+    [$._expression, $._statement],
+    [$._expression, $.literal_value],
+    [$._expression, $.identifier],
+    [$.parameter_list, $.identifier],
+
     [$._simple_type, $._expression],
     [$.qualified_type, $._expression],
     [$.func_literal, $.function_type],
@@ -109,16 +116,12 @@ module.exports = grammar({
       ),
 
     // query syntax for shisho
+    shisho_metavariable: ($) => seq(":[", $.shisho_metavariable_name, "]"),
     shisho_ellipsis: ($) => ":[...]",
-    shisho_metavariable: ($) =>
-      seq(
-        ":[",
-        choice($.shisho_metavariable_name, $.shisho_metavariable_ellipsis_name),
-        "]"
-      ),
+    shisho_ellipsis_metavariable: ($) =>
+      seq(":[", "...", $.shisho_metavariable_name, "]"),
+
     shisho_metavariable_name: ($) => /[A-Z_][A-Z_0-9]*/,
-    shisho_metavariable_ellipsis_name: ($) =>
-      seq("...", $.shisho_metavariable_name),
 
     _top_level_declaration: ($) =>
       choice(
@@ -224,7 +227,12 @@ module.exports = grammar({
         optional(
           seq(
             commaSep(
-              choice($.parameter_declaration, $.variadic_parameter_declaration)
+              choice(
+                $.shisho_ellipsis_metavariable,
+                $.shisho_metavariable,
+                $.parameter_declaration,
+                $.variadic_parameter_declaration
+              )
             ),
             optional(",")
           )
@@ -383,6 +391,9 @@ module.exports = grammar({
 
     _statement: ($) =>
       choice(
+        $.shisho_ellipsis_metavariable,
+        $.shisho_ellipsis,
+        $.shisho_metavariable,
         $._declaration,
         $._simple_statement,
         $.return_statement,
@@ -568,8 +579,9 @@ module.exports = grammar({
 
     _expression: ($) =>
       choice(
-        $.shisho_ellipsis,
         $.shisho_metavariable,
+        $.shisho_ellipsis_metavariable,
+        $.shisho_ellipsis,
         $.unary_expression,
         $.binary_expression,
         $.selector_expression,
@@ -722,8 +734,25 @@ module.exports = grammar({
         "{",
         optional(
           seq(
-            choice($.element, $.keyed_element),
-            repeat(seq(",", choice($.element, $.keyed_element))),
+            choice(
+              $.element,
+              $.keyed_element,
+              $.shisho_ellipsis,
+              $.shisho_ellipsis_metavariable,
+              $.shisho_metavariable
+            ),
+            repeat(
+              seq(
+                ",",
+                choice(
+                  $.element,
+                  $.keyed_element,
+                  $.shisho_ellipsis,
+                  $.shisho_ellipsis_metavariable,
+                  $.shisho_metavariable
+                )
+              )
+            ),
             optional(",")
           )
         ),
@@ -789,7 +818,9 @@ module.exports = grammar({
         field("name", $._type_identifier)
       ),
 
-    identifier: ($) => token(seq(letter, repeat(choice(letter, unicodeDigit)))),
+    identifier_intl: ($) =>
+      token(seq(letter, repeat(choice(letter, unicodeDigit)))),
+    identifier: ($) => choice($.identifier_intl, $.shisho_metavariable),
 
     _type_identifier: ($) => alias($.identifier, $.type_identifier),
     _field_identifier: ($) => alias($.identifier, $.field_identifier),

@@ -1,6 +1,6 @@
 {
   "name": "go",
-  "word": "identifier",
+  "word": "identifier_intl",
   "rules": {
     "source_file": {
       "type": "REPEAT",
@@ -62,10 +62,6 @@
         ]
       }
     },
-    "shisho_ellipsis": {
-      "type": "STRING",
-      "value": ":[...]"
-    },
     "shisho_metavariable": {
       "type": "SEQ",
       "members": [
@@ -74,17 +70,33 @@
           "value": ":["
         },
         {
-          "type": "CHOICE",
-          "members": [
-            {
-              "type": "SYMBOL",
-              "name": "shisho_metavariable_name"
-            },
-            {
-              "type": "SYMBOL",
-              "name": "shisho_metavariable_ellipsis_name"
-            }
-          ]
+          "type": "SYMBOL",
+          "name": "shisho_metavariable_name"
+        },
+        {
+          "type": "STRING",
+          "value": "]"
+        }
+      ]
+    },
+    "shisho_ellipsis": {
+      "type": "STRING",
+      "value": ":[...]"
+    },
+    "shisho_ellipsis_metavariable": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": ":["
+        },
+        {
+          "type": "STRING",
+          "value": "..."
+        },
+        {
+          "type": "SYMBOL",
+          "name": "shisho_metavariable_name"
         },
         {
           "type": "STRING",
@@ -95,19 +107,6 @@
     "shisho_metavariable_name": {
       "type": "PATTERN",
       "value": "[A-Z_][A-Z_0-9]*"
-    },
-    "shisho_metavariable_ellipsis_name": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "..."
-        },
-        {
-          "type": "SYMBOL",
-          "name": "shisho_metavariable_name"
-        }
-      ]
     },
     "_top_level_declaration": {
       "type": "CHOICE",
@@ -727,6 +726,14 @@
                           "members": [
                             {
                               "type": "SYMBOL",
+                              "name": "shisho_ellipsis_metavariable"
+                            },
+                            {
+                              "type": "SYMBOL",
+                              "name": "shisho_metavariable"
+                            },
+                            {
+                              "type": "SYMBOL",
                               "name": "parameter_declaration"
                             },
                             {
@@ -747,6 +754,14 @@
                               {
                                 "type": "CHOICE",
                                 "members": [
+                                  {
+                                    "type": "SYMBOL",
+                                    "name": "shisho_ellipsis_metavariable"
+                                  },
+                                  {
+                                    "type": "SYMBOL",
+                                    "name": "shisho_metavariable"
+                                  },
                                   {
                                     "type": "SYMBOL",
                                     "name": "parameter_declaration"
@@ -1825,6 +1840,18 @@
     "_statement": {
       "type": "CHOICE",
       "members": [
+        {
+          "type": "SYMBOL",
+          "name": "shisho_ellipsis_metavariable"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "shisho_ellipsis"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "shisho_metavariable"
+        },
         {
           "type": "SYMBOL",
           "name": "_declaration"
@@ -2922,11 +2949,15 @@
       "members": [
         {
           "type": "SYMBOL",
-          "name": "shisho_ellipsis"
+          "name": "shisho_metavariable"
         },
         {
           "type": "SYMBOL",
-          "name": "shisho_metavariable"
+          "name": "shisho_ellipsis_metavariable"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "shisho_ellipsis"
         },
         {
           "type": "SYMBOL",
@@ -3590,6 +3621,18 @@
                     {
                       "type": "SYMBOL",
                       "name": "keyed_element"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "shisho_ellipsis"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "shisho_ellipsis_metavariable"
+                    },
+                    {
+                      "type": "SYMBOL",
+                      "name": "shisho_metavariable"
                     }
                   ]
                 },
@@ -3612,6 +3655,18 @@
                           {
                             "type": "SYMBOL",
                             "name": "keyed_element"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "shisho_ellipsis"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "shisho_ellipsis_metavariable"
+                          },
+                          {
+                            "type": "SYMBOL",
+                            "name": "shisho_metavariable"
                           }
                         ]
                       }
@@ -4092,7 +4147,7 @@
         }
       ]
     },
-    "identifier": {
+    "identifier_intl": {
       "type": "TOKEN",
       "content": {
         "type": "SEQ",
@@ -4137,6 +4192,19 @@
           }
         ]
       }
+    },
+    "identifier": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "identifier_intl"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "shisho_metavariable"
+        }
+      ]
     },
     "_type_identifier": {
       "type": "ALIAS",
@@ -6543,6 +6611,32 @@
     }
   ],
   "conflicts": [
+    [
+      "_expression",
+      "_statement",
+      "identifier"
+    ],
+    [
+      "_expression",
+      "literal_value",
+      "identifier"
+    ],
+    [
+      "_expression",
+      "_statement"
+    ],
+    [
+      "_expression",
+      "literal_value"
+    ],
+    [
+      "_expression",
+      "identifier"
+    ],
+    [
+      "parameter_list",
+      "identifier"
+    ],
     [
       "_simple_type",
       "_expression"
